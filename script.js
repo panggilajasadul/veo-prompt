@@ -9,38 +9,17 @@ async function generatePrompt() {
 
   const eng = await translatePrompt(idn);
   document.getElementById("promptEN").value = eng;
-}
-// Simpan ke Firestore
-db.collection("prompts").add({
-  waktu: new Date().toLocaleString(),
-  prompt_idn: idn,
-  prompt_eng: eng
-})
-.then(() => {
-  console.log("✅ Prompt disimpan ke Firestore");
-})
-.catch((error) => {
-  console.error("❌ Gagal menyimpan:", error);
-});
-async function translatePrompt(teks) {
-  const res = await fetch("https://libretranslate.de/translate", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      q: teks,
-      source: "id",
-      target: "en",
-      format: "text"
-    })
+
+  // ✅ Simpan ke Firestore (posisi yang benar)
+  db.collection("prompts").add({
+    waktu: new Date().toLocaleString(),
+    prompt_idn: idn,
+    prompt_eng: eng
+  })
+  .then(() => {
+    console.log("✅ Prompt disimpan ke Firestore");
+  })
+  .catch((error) => {
+    console.error("❌ Gagal menyimpan:", error);
   });
-
-  const data = await res.json();
-  return data.translatedText || "Gagal menerjemahkan.";
-}
-
-function copyPrompt(id) {
-  const text = document.getElementById(id);
-  text.select();
-  navigator.clipboard.writeText(text.value);
-  alert("Prompt disalin!");
 }
