@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generator Prompt ke Veo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>🎬 Generator Prompt ke Veo</h2>
+
+    <input type="text" id="subjek" placeholder="Subjek (misal: seekor rubah)" />
+    <input type="text" id="aksi" placeholder="Aksi (misal: membaca buku)" />
+    <input type="text" id="tempat" placeholder="Tempat (misal: di hutan)" />
+    <input type="text" id="detailTambahan" placeholder="Detail tambahan (misal: hyperrealistic)" />
+
+    <button onclick="generatePrompt()">Hasilkan Prompt</button>
+
+    <div class="output">
+      <h3>🟢 Prompt Indonesia</h3>
+      <textarea id="promptID" readonly></textarea>
+      <button onclick="copyPrompt('promptID')">Salin ID</button>
+    </div>
+
+    <div class="output">
+      <h3>🔵 Prompt Inggris</h3>
+      <textarea id="promptEN" readonly></textarea>
+      <button onclick="copyPrompt('promptEN')">Salin EN</button>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script src="script.js"></script>
+</body>
+</html>
