@@ -10,7 +10,18 @@ async function generatePrompt() {
   const eng = await translatePrompt(idn);
   document.getElementById("promptEN").value = eng;
 }
-
+// Simpan ke Firestore
+db.collection("prompts").add({
+  waktu: new Date().toLocaleString(),
+  prompt_idn: idn,
+  prompt_eng: eng
+})
+.then(() => {
+  console.log("✅ Prompt disimpan ke Firestore");
+})
+.catch((error) => {
+  console.error("❌ Gagal menyimpan:", error);
+});
 async function translatePrompt(teks) {
   const res = await fetch("https://libretranslate.de/translate", {
     method: "POST",
